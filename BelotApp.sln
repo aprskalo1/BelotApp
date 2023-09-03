@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BelotApp", "BelotApp\BelotApp.csproj", "{1E25C7F5-8D61-4D65-B8F4-64D783EBB646}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E25C7F5-8D61-4D65-B8F4-64D783EBB646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E25C7F5-8D61-4D65-B8F4-64D783EBB646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E25C7F5-8D61-4D65-B8F4-64D783EBB646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E25C7F5-8D61-4D65-B8F4-64D783EBB646}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF252289-7CD4-44D4-80C3-4A9E4E97F3E6}
+	EndGlobalSection
+EndGlobal

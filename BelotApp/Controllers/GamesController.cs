@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BelotApp.Models;
 using BelotApp.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BelotApp.Controllers
 {
+    [Authorize]
     public class GamesController : Controller
     {
         private readonly NotesDbContext _context;

@@ -1,4 +1,5 @@
 using BelotApp.Data;
+using BelotApp.Mapping;
 using BelotApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add and configure AutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

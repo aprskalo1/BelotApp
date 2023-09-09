@@ -1,4 +1,4 @@
-﻿@model BelotApp.Models.Game
+﻿@model BelotApp.ViewModels.GameVM
 
 @{
     ViewData["Title"] = "Details";
@@ -10,12 +10,7 @@
     <h4>Game</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TeamOneName)
         </dt>
@@ -27,12 +22,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.TeamTwoName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlayedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlayedAt)
         </dd>
     </dl>
 </div>

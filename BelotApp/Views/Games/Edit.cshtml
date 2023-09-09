@@ -1,4 +1,4 @@
-﻿@model BelotApp.Models.Game
+﻿@model BelotApp.ViewModels.GameVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,11 +14,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="TeamOneName" class="control-label"></label>
                 <input asp-for="TeamOneName" class="form-control" />
                 <span asp-validation-for="TeamOneName" class="text-danger"></span>
@@ -27,11 +22,6 @@
                 <label asp-for="TeamTwoName" class="control-label"></label>
                 <input asp-for="TeamTwoName" class="form-control" />
                 <span asp-validation-for="TeamTwoName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlayedAt" class="control-label"></label>
-                <input asp-for="PlayedAt" class="form-control" />
-                <span asp-validation-for="PlayedAt" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

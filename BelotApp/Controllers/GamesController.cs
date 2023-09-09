@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using BelotApp.Models;
 using BelotApp.Data;
 using Microsoft.AspNetCore.Authorization;
+using BelotApp.ViewModels;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace BelotApp.Controllers
 {
@@ -15,18 +18,26 @@ namespace BelotApp.Controllers
     public class GamesController : Controller
     {
         private readonly NotesDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public GamesController(NotesDbContext context)
+        public GamesController(NotesDbContext context, IMapper mapper, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _mapper = mapper;
+            _userManager = userManager;
         }
 
         // GET: Games
         public async Task<IActionResult> Index()
         {
-              return _context.Games != null ? 
-                          View(await _context.Games.ToListAsync()) :
-                          Problem("Entity set 'NotesDbContext.Games'  is null.");
+            var userId = _userManager.GetUserId(User);
+            var games = await _context.Games
+                .Where(g => g.UserId == userId)
+                .ToListAsync();
+
+            var gamesVM = _mapper.Map<List<GameVM>>(games);
+            return View(gamesVM);
         }
 
         // GET: Games/Details/5
@@ -44,7 +55,8 @@ namespace BelotApp.Controllers
                 return NotFound();
             }
 
-            return View(game);
+            var gameVM = _mapper.Map<GameVM>(game);
+            return View(gameVM);
         }
 
         // GET: Games/Create
@@ -58,10 +70,14 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,TeamOneName,TeamTwoName,PlayedAt")] Game game)
+        public async Task<IActionResult> Create(GameVM gameVM)
         {
+            var game = _mapper.Map<Game>(gameVM);
             if (ModelState.IsValid)
             {
+                game.UserId = _userManager.GetUserId(User);
+                game.PlayedAt = DateTime.Now;
+
                 _context.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,7 +98,9 @@ namespace BelotApp.Controllers
             {
                 return NotFound();
             }
-            return View(game);
+
+            var gameVM = _mapper.Map<GameVM>(game);
+            return View(gameVM);
         }
 
         // POST: Games/Edit/5
@@ -90,8 +108,10 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,TeamOneName,TeamTwoName,PlayedAt")] Game game)
+        public async Task<IActionResult> Edit(int id, GameVM gameVM)
         {
+            var game = _mapper.Map<Game>(gameVM);
+
             if (id != game.Id)
             {
                 return NotFound();
@@ -99,6 +119,9 @@ namespace BelotApp.Controllers
 
             if (ModelState.IsValid)
             {
+                game.UserId = _userManager.GetUserId(User);
+                game.PlayedAt = DateTime.Now;
+
                 try
                 {
                     _context.Update(game);
@@ -117,7 +140,7 @@ namespace BelotApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            return View(gameVM);
         }
 
         // GET: Games/Delete/5
@@ -134,8 +157,9 @@ namespace BelotApp.Controllers
             {
                 return NotFound();
             }
-
-            return View(game);
+                    
+            var gameVM = _mapper.Map<GameVM>(game);
+            return View(gameVM);
         }
 
         // POST: Games/Delete/5

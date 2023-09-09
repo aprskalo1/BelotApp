@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BelotApp.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BelotApp.Controllers
 {
-    [Authorize]
     public class GameResultsController : Controller
     {
         private readonly NotesDbContext _context;
@@ -58,7 +56,7 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GameId,TeamOneResult,TeamTwoResult,CreatedAt")] GameResult gameResult)
+        public async Task<IActionResult> Create([Bind("Id,GameId,TeamOneResult,TeamTwoResult,Combination,CreatedAt")] GameResult gameResult)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +90,7 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GameId,TeamOneResult,TeamTwoResult,CreatedAt")] GameResult gameResult)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GameId,TeamOneResult,TeamTwoResult,Combination,CreatedAt")] GameResult gameResult)
         {
             if (id != gameResult.Id)
             {

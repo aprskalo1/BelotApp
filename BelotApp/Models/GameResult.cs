@@ -13,6 +13,8 @@ public partial class GameResult
 
     public int? TeamTwoResult { get; set; }
 
+    public string? Combination { get; set; }
+
     public DateTime? CreatedAt { get; set; }
 
     public virtual Game? Game { get; set; }

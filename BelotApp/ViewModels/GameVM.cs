@@ -17,5 +17,8 @@ namespace BelotApp.ViewModels
 
         [DisplayName("Datum")]
         public DateTime PlayedAt { get; set; }
+
+        [DisplayName("Pobjednik")]
+        public string? Winner { get; set; }
     }
 }

@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PlayedAt)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Winner)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PlayedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Winner)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

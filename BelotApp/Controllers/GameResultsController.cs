@@ -9,18 +9,23 @@ using BelotApp.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BelotApp.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace BelotApp.Controllers
 {
+    [Authorize]
     public class GameResultsController : Controller
     {
         private readonly NotesDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IMapper _mapper;
 
-        public GameResultsController(NotesDbContext context, IMapper mapper)
+        public GameResultsController(NotesDbContext context, IMapper mapper, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         // GET: GameResults
@@ -31,13 +36,23 @@ namespace BelotApp.Controllers
                 return NotFound();
             }
 
+            var userId = _context.Games
+                .Where(g => g.Id == gameId)
+                .Select(g => g.UserId)
+                .FirstOrDefault();
+
+            if (userId != _userManager.GetUserId(User))
+            {
+                return NotFound();
+            }
+
             TempData["GameId"] = gameId;
 
-            var notesDbContext = _context.GameResults
+            var gameResults = _context.GameResults
                 .Include(g => g.Game)
                 .Where(g  => g.GameId == gameId);
 
-            return View(await notesDbContext.ToListAsync());
+            return View(await gameResults.ToListAsync());
         }
 
         // GET: GameResults/Details/5

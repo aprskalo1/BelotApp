@@ -57,6 +57,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "GameResults",
+    pattern: "GameResults/{gameId:int}",
+    defaults: new { controller = "GameResults", action = "Index" }
+);
+
+app.MapControllerRoute(
     name: "customHomeRoute",
     pattern: "Home",
     defaults: new { controller = "Games", action = "Index" }
@@ -68,9 +74,9 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
-{ 
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(); 
-    
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
     var roles = new[] { "Admin", "User" };
     foreach (var role in roles)
     {

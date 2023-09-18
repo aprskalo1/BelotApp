@@ -6,22 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BelotApp.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using BelotApp.ViewModels;
+using AutoMapper;
 
 namespace BelotApp.Controllers
 {
     public class GameResultsController : Controller
     {
         private readonly NotesDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GameResultsController(NotesDbContext context)
+        public GameResultsController(NotesDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: GameResults
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? gameId)
         {
-            var notesDbContext = _context.GameResults.Include(g => g.Game);
+            if (gameId == null || _context.GameResults == null)
+            {
+                return NotFound();
+            }
+
+            TempData["GameId"] = gameId;
+
+            var notesDbContext = _context.GameResults
+                .Include(g => g.Game)
+                .Where(g  => g.GameId == gameId);
+
             return View(await notesDbContext.ToListAsync());
         }
 
@@ -47,7 +62,6 @@ namespace BelotApp.Controllers
         // GET: GameResults/Create
         public IActionResult Create()
         {
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id");
             return View();
         }
 
@@ -56,15 +70,19 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GameId,TeamOneResult,TeamTwoResult,Combination,CreatedAt")] GameResult gameResult)
+        public async Task<IActionResult> Create(GameResultsVM gameResultsVM)
         {
+            var gameResult = _mapper.Map<GameResult>(gameResultsVM);
+
             if (ModelState.IsValid)
             {
+                gameResult.GameId = (int)TempData["GameId"]!;
+                gameResult.CreatedAt = DateTime.Now;
+
                 _context.Add(gameResult);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { gameId = gameResult.GameId });
             }
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", gameResult.GameId);
             return View(gameResult);
         }
 

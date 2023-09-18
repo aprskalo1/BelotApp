@@ -9,6 +9,9 @@ namespace BelotApp.Mapping
         {
             CreateMap<GameVM, Game>();
             CreateMap<Game, GameVM>();
+
+            CreateMap<GameResultsVM, GameResult>();
+            CreateMap<GameResult, GameResultsVM>();
         }
     }
 }

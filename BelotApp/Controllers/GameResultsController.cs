@@ -175,12 +175,20 @@ namespace BelotApp.Controllers
             var gameResult = await _context.GameResults
                 .Include(g => g.Game)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var game = await _context.Games
+            .Where(g => g.Id == gameResult!.GameId)
+            .FirstOrDefaultAsync();
+            ViewBag.TeamOneName = game!.TeamOneName;
+            ViewBag.TeamTwoName = game!.TeamTwoName;
+
             if (gameResult == null)
             {
                 return NotFound();
             }
 
-            return View(gameResult);
+            var gameResultsVM = _mapper.Map<GameResultsVM>(gameResult); 
+            return View(gameResultsVM);
         }
 
         // POST: GameResults/Delete/5
@@ -199,7 +207,7 @@ namespace BelotApp.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { gameId = gameResult.GameId });
         }
 
         private bool GameResultExists(int id)

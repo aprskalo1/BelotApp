@@ -164,33 +164,6 @@ namespace BelotApp.Controllers
             return View(gameResult);
         }
 
-        // GET: GameResults/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.GameResults == null)
-            {
-                return NotFound();
-            }
-
-            var gameResult = await _context.GameResults
-                .Include(g => g.Game)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            var game = await _context.Games
-            .Where(g => g.Id == gameResult!.GameId)
-            .FirstOrDefaultAsync();
-            ViewBag.TeamOneName = game!.TeamOneName;
-            ViewBag.TeamTwoName = game!.TeamTwoName;
-
-            if (gameResult == null)
-            {
-                return NotFound();
-            }
-
-            var gameResultsVM = _mapper.Map<GameResultsVM>(gameResult); 
-            return View(gameResultsVM);
-        }
-
         // POST: GameResults/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

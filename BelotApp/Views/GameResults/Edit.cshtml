@@ -1,4 +1,4 @@
-﻿@model BelotApp.Models.GameResult
+﻿@model BelotApp.ViewModels.GameResultsVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,17 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="GameId" class="control-label"></label>
-                <select asp-for="GameId" class="form-control" asp-items="ViewBag.GameId"></select>
-                <span asp-validation-for="GameId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TeamOneResult" class="control-label"></label>
+                <label asp-for="TeamOneResult" class="control-label">@ViewBag.TeamOneName</label>
                 <input asp-for="TeamOneResult" class="form-control" />
                 <span asp-validation-for="TeamOneResult" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TeamTwoResult" class="control-label"></label>
+                <label asp-for="TeamTwoResult" class="control-label">@ViewBag.TeamTwoName</label>
                 <input asp-for="TeamTwoResult" class="form-control" />
                 <span asp-validation-for="TeamTwoResult" class="text-danger"></span>
             </div>
@@ -34,11 +29,6 @@
                 <span asp-validation-for="Combination" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -46,7 +36,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-gameId="@Model.GameId">Back to List</a>
 </div>
 
 @section Scripts {

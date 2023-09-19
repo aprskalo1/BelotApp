@@ -66,25 +66,6 @@ namespace BelotApp.Controllers
             return View(gameResultsVM);
         }
 
-        // GET: GameResults/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.GameResults == null)
-            {
-                return NotFound();
-            }
-
-            var gameResult = await _context.GameResults
-                .Include(g => g.Game)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (gameResult == null)
-            {
-                return NotFound();
-            }
-
-            return View(gameResult);
-        }
-
         // GET: GameResults/Create
         public IActionResult Create()
         {
@@ -123,12 +104,21 @@ namespace BelotApp.Controllers
             }
 
             var gameResult = await _context.GameResults.FindAsync(id);
+
+            var game = await _context.Games
+                .Where(g => g.Id == gameResult!.GameId)
+                .FirstOrDefaultAsync();
+            ViewBag.TeamOneName = game!.TeamOneName;
+            ViewBag.TeamTwoName = game!.TeamTwoName;
+
             if (gameResult == null)
             {
                 return NotFound();
             }
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", gameResult.GameId);
-            return View(gameResult);
+
+            var gameResultVM = _mapper.Map<GameResultsVM>(gameResult);
+            return View(gameResultVM);
         }
 
         // POST: GameResults/Edit/5
@@ -136,8 +126,10 @@ namespace BelotApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GameId,TeamOneResult,TeamTwoResult,Combination,CreatedAt")] GameResult gameResult)
+        public async Task<IActionResult> Edit(int id,GameResultsVM gameResultsVM)
         {
+            var gameResult = _mapper.Map<GameResult>(gameResultsVM);
+
             if (id != gameResult.Id)
             {
                 return NotFound();
@@ -147,6 +139,11 @@ namespace BelotApp.Controllers
             {
                 try
                 {
+                    gameResult.GameId = _context.GameResults
+                        .Where(g => g.Id == id)
+                        .Select(g => g.GameId)
+                        .FirstOrDefault();
+                    gameResult.CreatedAt = DateTime.Now;
                     _context.Update(gameResult);
                     await _context.SaveChangesAsync();
                 }
@@ -161,7 +158,7 @@ namespace BelotApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { gameId = gameResult.GameId });
             }
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", gameResult.GameId);
             return View(gameResult);

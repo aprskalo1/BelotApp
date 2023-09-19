@@ -6,6 +6,8 @@ namespace BelotApp.ViewModels
     {
         public int Id { get; set; }
 
+        public int GameId { get; set; }
+
         public int TeamOneResult { get; set; }
 
         public int TeamTwoResult { get; set; }

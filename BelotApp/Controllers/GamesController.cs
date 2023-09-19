@@ -80,7 +80,8 @@ namespace BelotApp.Controllers
 
                 _context.Add(game);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "GameResults", new { gameId = game.Id });
+
             }
             return View(game);
         }

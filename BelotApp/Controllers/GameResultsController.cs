@@ -36,10 +36,10 @@ namespace BelotApp.Controllers
                 return NotFound();
             }
 
-            var userId = _context.Games
+            var userId = await _context.Games
                 .Where(g => g.Id == gameId)
                 .Select(g => g.UserId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (userId != _userManager.GetUserId(User))
             {
@@ -48,11 +48,22 @@ namespace BelotApp.Controllers
 
             TempData["GameId"] = gameId;
 
-            var gameResults = _context.GameResults
-                .Include(g => g.Game)
-                .Where(g  => g.GameId == gameId);
+            var game = await _context.Games
+                .Where(g => g.Id == gameId)
+                .FirstOrDefaultAsync();
+            TempData["TeamOneName"] = game!.TeamOneName;
+            TempData["TeamTwoName"] = game!.TeamTwoName;
 
-            return View(await gameResults.ToListAsync());
+            ViewBag.TeamOneName = game!.TeamOneName;    
+            ViewBag.TeamTwoName = game!.TeamTwoName;
+
+            var gameResults = await _context.GameResults
+                .Include(g => g.Game)
+                .Where(g  => g.GameId == gameId)
+                .ToListAsync();
+
+            var gameResultsVM = _mapper.Map<List<GameResultsVM>>(gameResults);
+            return View(gameResultsVM);
         }
 
         // GET: GameResults/Details/5
@@ -77,6 +88,8 @@ namespace BelotApp.Controllers
         // GET: GameResults/Create
         public IActionResult Create()
         {
+            ViewBag.TeamOneName = TempData["TeamOneName"];
+            ViewBag.TeamTwoName = TempData["TeamTwoName"];
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BelotApp.Models.GameResult>
+﻿@model IEnumerable<BelotApp.ViewModels.GameResultsVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,19 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TeamOneResult)
+                @ViewBag.TeamOneName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeamTwoResult)
+                @ViewBag.TeamTwoName
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Combination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Game)
             </th>
             <th></th>
         </tr>
@@ -41,12 +35,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Combination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Game.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

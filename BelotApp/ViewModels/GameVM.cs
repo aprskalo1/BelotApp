@@ -20,5 +20,8 @@ namespace BelotApp.ViewModels
 
         [DisplayName("Pobjednik")]
         public string? Winner { get; set; }
+
+        [DisplayName("Trajanje")]
+        public int? GameLength { get; set; }
     }
 }

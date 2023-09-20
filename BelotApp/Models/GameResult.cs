@@ -15,6 +15,10 @@ public partial class GameResult
 
     public string? Combination { get; set; }
 
+    public string? TrumpCall { get; set; }
+
+    public string? CombinationCall { get; set; }
+
     public DateTime? CreatedAt { get; set; }
 
     public virtual Game? Game { get; set; }

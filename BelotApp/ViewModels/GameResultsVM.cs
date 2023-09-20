@@ -12,6 +12,12 @@ namespace BelotApp.ViewModels
 
         public int TeamTwoResult { get; set; }
 
+        [DisplayName("Adut od:")]
+        public string? TrumpCall { get; set; }
+
+        [DisplayName("Zvanja od:")]
+        public string? CombinationCall { get; set; }
+
         [DisplayName("Zvanja")]
         public string? Combination { get; set; }
     }

@@ -25,21 +25,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamOneResult)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamTwoResult)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Combination)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TeamOneResult)
+                @Model.Sum(item => item.TeamOneResult)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TeamTwoResult)
+                @Model.Sum(item => item.TeamTwoResult)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Combination)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-            </td>
+            <td></td>
+            <td></td>
         </tr>
-}
     </tbody>
 </table>

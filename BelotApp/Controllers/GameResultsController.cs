@@ -180,7 +180,7 @@ namespace BelotApp.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new { gameId = gameResult.GameId });
+            return RedirectToAction(nameof(Index), new { gameId = gameResult!.GameId });
         }
 
         private bool GameResultExists(int id)

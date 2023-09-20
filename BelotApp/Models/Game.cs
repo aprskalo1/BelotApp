@@ -15,6 +15,8 @@ public partial class Game
 
     public string? Winner { get; set; }
 
+    public int? GameLength { get; set; }
+
     public DateTime? PlayedAt { get; set; }
 
     public virtual ICollection<GameResult> GameResults { get; set; } = new List<GameResult>();

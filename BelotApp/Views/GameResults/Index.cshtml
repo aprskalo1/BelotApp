@@ -29,10 +29,75 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TeamOneResult)
+                    @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
+                    {
+                        if (item.TeamOneResult > (item.Combination + 162) / 2)
+                        {
+                            var result = item.TeamOneResult + item.Combination;
+                            @result
+                        } else
+                        {
+                            @Html.Raw("-")
+                        }
+                    } 
+                    else if (ViewBag.TeamOneName == item.CombinationCall && ViewBag.TeamOneName != item.TrumpCall)
+                    {
+                        var result = item.TeamOneResult + item.Combination;
+                        @result
+                    }
+                    else if (ViewBag.TeamOneName != item.CombinationCall && ViewBag.TeamOneName == item.TrumpCall)
+                    {
+                        if (item.TeamOneResult > (item.Combination + 162) / 2)
+                        {
+                            var result = item.TeamOneResult;
+                            @result
+                        }
+                        else
+                        {
+                            @Html.Raw("-")
+                        }
+                    }
+                    else
+                    {
+                        var result = item.TeamOneResult;
+                        @result
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TeamTwoResult)
+                    @if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName == item.CombinationCall)
+                    {
+                        if (item.TeamTwoResult > (item.Combination + 162) / 2)
+                        {
+                            var result = item.TeamTwoResult + item.Combination;
+                            @result
+                        }
+                        else
+                        {
+                            @Html.Raw("-")
+                        }
+                    }
+                    else if (ViewBag.TeamTwoName == item.CombinationCall && ViewBag.TeamTwoName != item.TrumpCall)
+                    {
+                        var result = item.TeamTwoResult + item.Combination;
+                        @result
+                    }
+                    else if (ViewBag.TeamTwoName != item.CombinationCall && ViewBag.TeamTwoName == item.TrumpCall)
+                    {
+                        if (item.TeamTwoResult > (item.Combination + 162) / 2)
+                        {
+                            var result = item.TeamTwoResult;
+                            @result
+                        }
+                        else
+                        {
+                            @Html.Raw("-")
+                        }
+                    }
+                    else
+                    {
+                        var result = item.TeamTwoResult;
+                        @result
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Combination)
@@ -43,12 +108,16 @@
             </tr>
         }
 
+        @{
+            var teamTwoCombinationSum = Model.Where(item => item.CombinationCall == ViewBag.TeamTwoName).Sum(item => item.Combination);
+        }
+
         <tr>
             <td>
-                @Model.Sum(item => item.TeamOneResult)
+
             </td>
             <td>
-                @Model.Sum(item => item.TeamTwoResult)
+
             </td>
             <td></td>
             <td></td>

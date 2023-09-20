@@ -87,6 +87,10 @@ namespace BelotApp.Controllers
             {
                 gameResult.GameId = (int)TempData["GameId"]!;
                 gameResult.CreatedAt = DateTime.Now;
+                if (gameResult.Combination == null)
+                {
+                    gameResult.Combination = 0;
+                }
 
                 _context.Add(gameResult);
                 await _context.SaveChangesAsync();
@@ -144,6 +148,10 @@ namespace BelotApp.Controllers
                         .Select(g => g.GameId)
                         .FirstOrDefault();
                     gameResult.CreatedAt = DateTime.Now;
+                    if (gameResult.Combination == null)
+                    {
+                        gameResult.Combination = 0;
+                    }
                     _context.Update(gameResult);
                     await _context.SaveChangesAsync();
                 }

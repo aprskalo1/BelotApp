@@ -19,6 +19,6 @@ namespace BelotApp.ViewModels
         public string? CombinationCall { get; set; }
 
         [DisplayName("Zvanja")]
-        public string? Combination { get; set; }
+        public int? Combination { get; set; }
     }
 }

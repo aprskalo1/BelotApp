@@ -13,7 +13,7 @@ public partial class GameResult
 
     public int? TeamTwoResult { get; set; }
 
-    public string? Combination { get; set; }
+    public int? Combination { get; set; }
 
     public string? TrumpCall { get; set; }
 

@@ -6,28 +6,27 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @ViewBag.TeamOneName
-            </th>
-            <th>
-                @ViewBag.TeamTwoName
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Combination)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+@{
+    int? teamOneResultsSum = 0;
+    int? teamTwoResultsSum = 0;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @ViewBag.TeamOneName
+                </th>
+                <th>
+                    @ViewBag.TeamTwoName
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Combination)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-    @{
-        int? teamOneResultsSum = 0;
-        int? teamTwoResultsSum = 0;
+
+
 
         <tbody>
             @foreach (var item in Model)
@@ -183,5 +182,20 @@
                 <td></td>
             </tr>
         </tbody>
-    }
-</table>
+    </table>
+    <p>
+        @{
+            if (teamOneResultsSum >= ViewBag.GameLength)
+            {
+                <h2>@ViewBag.TeamOneName je pobjedio!</h2>
+            }
+            else if (teamTwoResultsSum >= ViewBag.GameLength)
+            {
+                <h2>@ViewBag.TeamTwoName je pobjedio!</h2>
+            } else
+            {
+                <a asp-action="Create">Create New</a>
+            }
+        }
+    </p>
+}

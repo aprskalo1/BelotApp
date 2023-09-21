@@ -56,6 +56,7 @@ namespace BelotApp.Controllers
 
             ViewBag.TeamOneName = game!.TeamOneName;    
             ViewBag.TeamTwoName = game!.TeamTwoName;
+            ViewBag.GameLength = game!.GameLength;
 
             var gameResults = await _context.GameResults
                 .Include(g => g.Game)

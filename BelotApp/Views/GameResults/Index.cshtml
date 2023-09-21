@@ -27,6 +27,15 @@
     <tbody>
         @foreach (var item in Model)
         {
+            bool teamOnePass = true;
+            bool teamTwoPass = true;
+            if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= (item.Combination + 162) / 2)
+            {
+                teamOnePass = false;
+            } else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult <= (item.Combination + 162) / 2)
+            {
+                teamTwoPass = false;
+            }
             <tr>
                 <td>
                     @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
@@ -42,8 +51,16 @@
                     } 
                     else if (ViewBag.TeamOneName == item.CombinationCall && ViewBag.TeamOneName != item.TrumpCall)
                     {
-                        var result = item.TeamOneResult + item.Combination;
-                        @result
+                        int? result;
+                        if (!teamTwoPass)
+                        {
+                            result = 162 + item.Combination;
+                            @result
+                        } else
+                        {
+                            result = item.TeamOneResult + item.Combination;
+                            @result
+                        }
                     }
                     else if (ViewBag.TeamOneName != item.CombinationCall && ViewBag.TeamOneName == item.TrumpCall)
                     {
@@ -59,8 +76,17 @@
                     }
                     else
                     {
-                        var result = item.TeamOneResult;
-                        @result
+                        int? result;
+                        if (!teamTwoPass)
+                        {
+                            result = 162 + item.Combination;
+                            @result
+                        }
+                        else
+                        {
+                            result = item.TeamOneResult;
+                            @result
+                        }
                     }
                 </td>
                 <td>
@@ -78,8 +104,17 @@
                     }
                     else if (ViewBag.TeamTwoName == item.CombinationCall && ViewBag.TeamTwoName != item.TrumpCall)
                     {
-                        var result = item.TeamTwoResult + item.Combination;
-                        @result
+                        int? result;
+                        if (!teamOnePass)
+                        {
+                            result = 162 + item.Combination;
+                            @result
+                        }
+                        else
+                        {
+                            result = item.TeamTwoResult + item.Combination;
+                            @result
+                        }
                     }
                     else if (ViewBag.TeamTwoName != item.CombinationCall && ViewBag.TeamTwoName == item.TrumpCall)
                     {
@@ -95,8 +130,17 @@
                     }
                     else
                     {
-                        var result = item.TeamTwoResult;
-                        @result
+                        int? result;
+                        if (!teamOnePass)
+                        {
+                            result = 162 + item.Combination;
+                            @result
+                        }
+                        else
+                        {
+                            result = item.TeamTwoResult;
+                            @result
+                        }
                     }
                 </td>
                 <td>
@@ -108,16 +152,12 @@
             </tr>
         }
 
-        @{
-            var teamTwoCombinationSum = Model.Where(item => item.CombinationCall == ViewBag.TeamTwoName).Sum(item => item.Combination);
-        }
-
         <tr>
             <td>
 
             </td>
             <td>
-
+                
             </td>
             <td></td>
             <td></td>

@@ -40,6 +40,18 @@ namespace BelotApp.Controllers
             return View(gamesVM);
         }
 
+        //GET: Games/GamesByUserId
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GamesByUserId(string userId)
+        {
+            var games = await _context.Games
+                .Where(g => g.UserId == userId)
+                .ToListAsync();
+
+            var gamesVM = _mapper.Map<List<GameVM>>(games);
+            return View(gamesVM);
+        }
+
         // GET: Games/Create
         public IActionResult Create()
         {

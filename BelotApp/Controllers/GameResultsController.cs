@@ -41,7 +41,7 @@ namespace BelotApp.Controllers
                 .Select(g => g.UserId)
                 .FirstOrDefaultAsync();
 
-            if (userId != _userManager.GetUserId(User))
+            if (userId != _userManager.GetUserId(User) && !User.IsInRole("Admin"))
             {
                 return NotFound();
             }

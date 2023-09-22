@@ -31,7 +31,8 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-action="GamesByUserId" asp-controller="Games" asp-route-userId="@item.Id">View Games</a>
             </td>
         </tr>
 }

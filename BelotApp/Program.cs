@@ -63,6 +63,12 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "GameByUserId",
+    pattern: "Games/UserGames/{userId}",
+    defaults: new { controller = "Games", action = "GamesByUserId" }
+);
+
+app.MapControllerRoute(
     name: "customHomeRoute",
     pattern: "Home",
     defaults: new { controller = "Games", action = "Index" }

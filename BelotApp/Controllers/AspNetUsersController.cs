@@ -65,13 +65,15 @@ namespace BelotApp.Controllers
 
             if (user != null)
             {
-                var games = _context.Games.Where(g => g.UserId == id).ToList();
+                var games = _context.Games.Where(g => g.UserId == user.Id).ToList();
                 foreach (var game in games)
                 {
                     var gameResults = _context.GameResults.Where(gr => gr.GameId == game.Id).ToList();
                     _context.GameResults.RemoveRange(gameResults);
                 }
                 _context.Games.RemoveRange(games);
+                await _context.SaveChangesAsync();
+
                 var result = await _userManager.DeleteAsync(user);
 
                 if (result.Succeeded)

@@ -12,6 +12,9 @@ namespace BelotApp.Mapping
 
             CreateMap<GameResultsVM, GameResult>();
             CreateMap<GameResult, GameResultsVM>();
+
+            CreateMap<UsersVM, AspNetUsers>();
+            CreateMap<AspNetUsers, UsersVM>();
         }
     }
 }

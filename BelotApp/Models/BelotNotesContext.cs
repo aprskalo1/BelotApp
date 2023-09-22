@@ -15,24 +15,25 @@ public partial class BelotNotesContext : DbContext
     {
     }
 
-    public virtual DbSet<GameResult> GameResults { get; set; }
+    public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("server=.;Database=BelotNotes;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<GameResult>(entity =>
+        modelBuilder.Entity<AspNetUsers>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__GameResu__3214EC076DB218BB");
+            entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
 
-            entity.Property(e => e.Combination)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                .IsUnique()
+                .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+            entity.Property(e => e.Email).HasMaxLength(256);
+            entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+            entity.Property(e => e.UserName).HasMaxLength(256);
         });
 
         OnModelCreatingPartial(modelBuilder);

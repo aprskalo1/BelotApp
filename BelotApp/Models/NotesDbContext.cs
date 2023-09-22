@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using BelotApp.Models;
 
 namespace BelotApp.Models;
 
@@ -18,6 +19,8 @@ public partial class NotesDbContext : DbContext
     public virtual DbSet<Game> Games { get; set; }
 
     public virtual DbSet<GameResult> GameResults { get; set; }
+
+    public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("server=.;Database=BelotNotes;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
@@ -55,4 +58,6 @@ public partial class NotesDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public DbSet<BelotApp.Models.AspNetUsers> AspNetUser { get; set; } = default!;
 }

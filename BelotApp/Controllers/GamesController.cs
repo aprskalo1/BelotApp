@@ -40,25 +40,6 @@ namespace BelotApp.Controllers
             return View(gamesVM);
         }
 
-        // GET: Games/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Games == null)
-            {
-                return NotFound();
-            }
-
-            var game = await _context.Games
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-
-            var gameVM = _mapper.Map<GameVM>(game);
-            return View(gameVM);
-        }
-
         // GET: Games/Create
         public IActionResult Create()
         {
@@ -144,25 +125,6 @@ namespace BelotApp.Controllers
             return View(gameVM);
         }
 
-        // GET: Games/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Games == null)
-            {
-                return NotFound();
-            }
-
-            var game = await _context.Games
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-                    
-            var gameVM = _mapper.Map<GameVM>(game);
-            return View(gameVM);
-        }
-
         // POST: Games/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -175,6 +137,9 @@ namespace BelotApp.Controllers
             var game = await _context.Games.FindAsync(id);
             if (game != null)
             {
+                var gameResults = _context.GameResults.Where(gr => gr.GameId == id);
+                _context.GameResults.RemoveRange(gameResults);
+
                 _context.Games.Remove(game);
             }
             

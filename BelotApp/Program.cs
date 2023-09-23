@@ -69,6 +69,12 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "Contacts",
+    pattern: "Contacts",
+    defaults: new { controller = "Contacts", action = "Contact" }
+);
+
+app.MapControllerRoute(
     name: "customHomeRoute",
     pattern: "Home",
     defaults: new { controller = "Games", action = "Index" }

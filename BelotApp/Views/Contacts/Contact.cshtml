@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Kontakt";
+}
+
+<h1>Kontakt</h1>
+
+<div class="container">
+    <p>Kontaktiraj developera: <a href="mailto:ante.prskalo4@gmail.com">ante.prskalo4@gmail.com</a></p>
+    <partial name="_BugReportPartial" />
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

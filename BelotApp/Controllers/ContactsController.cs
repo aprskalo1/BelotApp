@@ -1,9 +1,11 @@
 ﻿using BelotApp.Models;
 using BelotApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Net.Mail;
 
+[Authorize]
 public class ContactsController : Controller
 {
     public IActionResult Contact()

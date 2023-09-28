@@ -33,19 +33,34 @@
             {
                 bool teamOnePass = true;
                 bool teamTwoPass = true;
-                if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= (item.Combination + 162) / 2)
+                
+                if (item.Combination == 0)
                 {
-                    teamOnePass = false;
-                }
-                else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult <= (item.Combination + 162) / 2)
+                    if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= 162 / 2)
+                    {
+                        teamOnePass = false;
+                    }
+                    else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult <= 162 / 2)
+                    {
+                        teamTwoPass = false;
+                    }
+                } else
                 {
-                    teamTwoPass = false;
+                    if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
+                    {
+                        teamOnePass = false;
+                    }
+                    else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult + item.Combination <= (item.Combination + 162) / 2)
+                    {
+                        teamTwoPass = false;
+                    }
                 }
+
                 <tr>
                     <td>
                         @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
                         {
-                            if (item.TeamOneResult > (item.Combination + 162) / 2)
+                            if (item.TeamOneResult + item.Combination > (item.Combination + 162) / 2)
                             {
                                 var result = item.TeamOneResult + item.Combination;
                                 teamOneResultsSum += result;
@@ -105,7 +120,7 @@
                     <td>
                         @if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName == item.CombinationCall)
                         {
-                            if (item.TeamTwoResult > (item.Combination + 162) / 2)
+                            if (item.TeamTwoResult + item.Combination > (item.Combination + 162) / 2)
                             {
                                 var result = item.TeamTwoResult + item.Combination;
                                 teamTwoResultsSum += result;

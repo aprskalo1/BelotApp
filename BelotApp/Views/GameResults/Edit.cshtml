@@ -25,10 +25,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Combination" class="control-label"></label>
-                <input asp-for="Combination" class="form-control" />
+                <input asp-for="Combination" class="form-control" value='@(Model.Combination == 0 ? "" : Model.Combination.ToString())' />
                 <span asp-validation-for="Combination" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="combinationCallDiv">
                 <label asp-for="CombinationCall" class="control-label"></label>
                 <select asp-for="CombinationCall" class="form-control">
                     <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
@@ -60,5 +60,26 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            if ($("#Combination").val() == "") {
+                $("#combinationCallDiv").hide();
+            } else {
+                $("#combinationCallDiv").show();
+            }
+
+            $("#Combination").keyup(function () {
+                if ($("#Combination").val() == "") {
+                    $("#combinationCallDiv").slideUp();
+                }
+                else {
+                    $("#combinationCallDiv").slideDown();
+                }
+            });
+        });
+    </script>
 }

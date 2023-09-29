@@ -159,6 +159,19 @@ namespace BelotApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public IActionResult SetWinner(int gameId, string winningTeam)
+        {
+            var game = _context.Games.Find(gameId);
+            if (game == null)
+            {
+                return NotFound();
+            }
+            game.Winner = winningTeam;
+            _context.SaveChanges();
+            return Ok();
+        }
+
         private bool GameExists(int id)
         {
           return (_context.Games?.Any(e => e.Id == id)).GetValueOrDefault();

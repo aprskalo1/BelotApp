@@ -33,7 +33,7 @@
             {
                 bool teamOnePass = true;
                 bool teamTwoPass = true;
-                
+
                 if (item.Combination == 0)
                 {
                     if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= 162 / 2)
@@ -44,7 +44,8 @@
                     {
                         teamTwoPass = false;
                     }
-                } else
+                }
+                else
                 {
                     if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
                     {
@@ -200,17 +201,65 @@
     </table>
     <p>
         @{
-            if (teamOneResultsSum >= ViewBag.GameLength)
-            {
-                <h2>@ViewBag.TeamOneName je pobjedio!</h2>
-            }
-            else if (teamTwoResultsSum >= ViewBag.GameLength)
-            {
-                <h2>@ViewBag.TeamTwoName je pobjedio!</h2>
-            } else
+            if (teamOneResultsSum < ViewBag.GameLength && teamTwoResultsSum < ViewBag.GameLength)
             {
                 <a asp-action="Create">Create New</a>
             }
         }
     </p>
 }
+
+<div class="modal fade" id="winnerPopUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Pobjednik</h5>
+            </div>
+            <div class="modal-body">
+                @{
+                    if (teamOneResultsSum >= ViewBag.GameLength)
+                    {
+                        <h2>@ViewBag.TeamOneName</h2>
+                    }
+                    else if (teamTwoResultsSum >= ViewBag.GameLength)
+                    {
+                        <h2>@ViewBag.TeamTwoName</h2>
+                    }
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            if (@teamOneResultsSum >= @(ViewBag.GameLength) || @teamTwoResultsSum >= @(ViewBag.GameLength)) {
+                $("#winnerPopUpModal").modal("show");
+
+                var winningTeam = @teamOneResultsSum >= @(ViewBag.GameLength) ? '@ViewBag.TeamOneName' : '@ViewBag.TeamTwoName';
+                var gameId = @Model.FirstOrDefault()!.GameId;
+
+                $.ajax({
+                    url: '/Games/SetWinner',
+                    type: 'POST',
+                    data: { gameId: gameId, winningTeam: winningTeam },
+                    success: function (data) {
+                        // Handle success
+                        console.log(data);
+                    },
+                    error: function (error) {
+                        // Handle error
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    </script>
+}
+
+

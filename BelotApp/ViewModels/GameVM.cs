@@ -9,10 +9,12 @@ namespace BelotApp.ViewModels
 
         [DisplayName("Prvi tim")]
         [StringLength(50)]
+        [Required]
         public string? TeamOneName { get; set; }
 
         [DisplayName("Drugi tim")]
         [StringLength(50)]
+        [Required]
         public string? TeamTwoName { get; set; }
 
         [DisplayName("Datum")]
@@ -22,6 +24,7 @@ namespace BelotApp.ViewModels
         public string? Winner { get; set; }
 
         [DisplayName("Trajanje")]
+        [Required]
         public int? GameLength { get; set; }
     }
 }

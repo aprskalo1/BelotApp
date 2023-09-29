@@ -241,7 +241,7 @@
                 $("#winnerPopUpModal").modal("show");
 
                 var winningTeam = @teamOneResultsSum >= @(ViewBag.GameLength) ? '@ViewBag.TeamOneName' : '@ViewBag.TeamTwoName';
-                var gameId = @Model.FirstOrDefault()!.GameId;
+                var gameId = @(ViewBag.GameId);
 
                 $.ajax({
                     url: '/Games/SetWinner',
@@ -260,5 +260,3 @@
         });
     </script>
 }
-
-

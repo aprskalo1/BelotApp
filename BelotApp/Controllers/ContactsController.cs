@@ -14,7 +14,7 @@ public class ContactsController : Controller
     }
 
     [HttpPost]
-    public IActionResult SubmitReport(BugReportVM bugReportVM)
+    public JsonResult SubmitReport(BugReportVM bugReportVM)
     {
         if (ModelState.IsValid)
         {
@@ -33,10 +33,10 @@ public class ContactsController : Controller
             smtpClient.Credentials = nc;
             smtpClient.Send(mm);
 
-            return RedirectToAction("Index", "Games");
+            return Json(new { success = true });
         }
-        
-        return RedirectToAction("Contact");
+
+        return Json(new { success = false });
     }
 }
 

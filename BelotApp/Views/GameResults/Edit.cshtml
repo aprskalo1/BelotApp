@@ -45,18 +45,33 @@
                 <span asp-validation-for="TrumpCall" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spremi" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <form asp-action="Delete" onsubmit="return confirm('Želite li sigurno obrisati rezultat?');">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index" asp-route-gameId="@Model.GameId">Back to List</a>
-    </form>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">
+        Obriši
+    </button>
+</div>
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                Želite li obrisati rezultat?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Obriši" class="btn btn-danger" />
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

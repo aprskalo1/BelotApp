@@ -44,6 +44,7 @@
                 <h4>Uspješno ste poslali poruku!</h4>
             </div>
             <div class="modal-footer">
+                <a asp-action="Index" asp-controller="Games" class="btn btn-primary">Moje Igre</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -68,6 +69,8 @@
                 success: function (data) {
                     if (data.success) {
                         $("#successPartial").modal("show");
+                        form.find("input[type=text], input[type=email], textarea").val("");
+
                     }
                 }
             });

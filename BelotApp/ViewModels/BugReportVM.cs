@@ -11,7 +11,7 @@ namespace BelotApp.ViewModels
         [DisplayName("Naslov")]
         public string Subject { get; set; }
 
-        [DisplayName("Opis problema")]
+        [DisplayName("Opis")]
         public string Description { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BelotApp.ViewModels.GameVM>
+﻿@model PagedList.IPagedList<BelotApp.ViewModels.GameVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -24,16 +24,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TeamOneName)
+                Prvi tim
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeamTwoName)
+                Drugi tim
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlayedAt)
+                Datum
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Winner)
+                Pobjednik
             </th>
             <th></th>
         </tr>
@@ -63,3 +63,31 @@
         }
     </tbody>
 </table>
+<div class="pagination d-flex justify-content-center">
+    <ul class="pagination">
+        @if (Model.PageNumber > 1)
+        {
+            <li class="page-item">
+                <a class="page-link btn btn-sm" href="@Url.Action("Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Prethodna</a>
+            </li>
+        }
+
+        @if (Model.PageCount > 1)
+        {
+            @for (var pageNumber = Math.Max(1, Model.PageNumber - 2); pageNumber <= Math.Min(Model.PageCount, Model.PageNumber + 2); pageNumber++)
+            {
+                <li class="page-item @(Model.PageNumber == pageNumber ? "active" : "")">
+                    <a class="page-link btn btn-sm" href="@Url.Action("Index", new { page = pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">@pageNumber</a>
+                </li>
+            }
+        }
+
+        @if (Model.PageNumber < Model.PageCount)
+        {
+            <li class="page-item">
+                <a class="page-link btn btn-sm" href="@Url.Action("Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })">Sljedeća</a>
+            </li>
+        }
+    </ul>
+</div>
+

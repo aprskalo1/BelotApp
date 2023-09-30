@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using BelotApp.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using PagedList;
 
 namespace BelotApp.Controllers
 {
@@ -29,7 +30,7 @@ namespace BelotApp.Controllers
         }
 
         // GET: Games
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, int? page)
         {
             ViewData["CurrentFilter"] = searchString;
 
@@ -38,13 +39,24 @@ namespace BelotApp.Controllers
                 .Where(g => g.UserId == userId)
                 .ToListAsync();
 
+            if (searchString != null)
+            {
+                page = 1;
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 games = games.Where(g => g.TeamOneName!.Contains(searchString) || g.TeamTwoName!.Contains(searchString)).ToList();
             }
 
             var gamesVM = _mapper.Map<List<GameVM>>(games);
-            return View(gamesVM);
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.CurrentFilter = searchString;
+
+            return View(gamesVM.ToPagedList(pageNumber, pageSize));
         }
 
         //GET: Games/GamesByUserId

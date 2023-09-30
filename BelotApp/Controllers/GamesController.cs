@@ -29,12 +29,19 @@ namespace BelotApp.Controllers
         }
 
         // GET: Games
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            ViewData["CurrentFilter"] = searchString;
+
             var userId = _userManager.GetUserId(User);
             var games = await _context.Games
                 .Where(g => g.UserId == userId)
                 .ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                games = games.Where(g => g.TeamOneName!.Contains(searchString) || g.TeamTwoName!.Contains(searchString)).ToList();
+            }
 
             var gamesVM = _mapper.Map<List<GameVM>>(games);
             return View(gamesVM);
@@ -154,7 +161,7 @@ namespace BelotApp.Controllers
 
                 _context.Games.Remove(game);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -174,7 +181,7 @@ namespace BelotApp.Controllers
 
         private bool GameExists(int id)
         {
-          return (_context.Games?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Games?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

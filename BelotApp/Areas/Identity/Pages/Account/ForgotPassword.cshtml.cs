@@ -73,7 +73,7 @@ namespace BelotApp.Areas.Identity.Pages.Account
 
                 MailMessage mm = new MailMessage("infobeloteapp@gmail.com", Input.Email);
                 mm.Subject = "Ponovno postavljanje lozinke";
-                mm.Body = $"Ponovno postavljanje lozinke za Vaš račun. Molimo Vas da kliknete <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>ovdje</a> kako biste postavili novu lozinku.";
+                mm.Body = $"Poštovani/a {user.UserName},<br><br>Primili smo Vaš zahtjev za ponovno postavljanje lozinke na Vašem računu. Kako biste postavili novu lozinku, molimo vas da kliknete na sljedeću poveznicu:<br><br><a href=\"{HtmlEncoder.Default.Encode(callbackUrl)}\">Postavi novu lozinku</a><br><br>Ako niste zatražili promjenu lozinke, možete zanemariti ovu poruku.<br><br>S poštovanjem,<br>Vaša BeloteApp ekipa";
 
                 mm.IsBodyHtml = true;
 

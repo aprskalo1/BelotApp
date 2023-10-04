@@ -51,7 +51,7 @@ namespace BelotApp.Controllers
 
             var gamesVM = _mapper.Map<List<GameVM>>(games);
 
-            int pageSize = 2;
+            int pageSize = 9;
             int pageNumber = (page ?? 1);
 
             ViewBag.CurrentFilter = searchString;

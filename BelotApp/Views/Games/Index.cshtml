@@ -4,11 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Moje Igre</h1>
 
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
@@ -20,49 +16,43 @@
     </div>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Prvi tim
-            </th>
-            <th>
-                Drugi tim
-            </th>
-            <th>
-                Datum
-            </th>
-            <th>
-                Pobjednik
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TeamOneName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TeamTwoName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PlayedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Winner)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Index" asp-controller="GameResults" asp-route-gameId="@item.Id">View Game</a>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm enlarge-card" style="min-width: 265px; border-radius: 20px;">
+                <div class="card-img-top" style="background: #2C75C8; height: 100px; display: flex; justify-content: center; align-items: center; border-radius: 20px">
+                    <h4 class="text-white">@Html.DisplayFor(modelItem => item.PlayedAt)</h4>
+                </div>
+                <div class="card-body" style="width: 100%;">
+                    <div class="d-flex flex-wrap">
+                        <div class="col text-center">
+                            <p>TIM 1</p>
+                            <p>@Html.DisplayFor(modelItem => item.TeamOneName)</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>Pobjednik</p>
+                            <p>@Html.DisplayFor(modelItem => item.Winner)</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>TIM 2</p>
+                            <p>@Html.DisplayFor(modelItem => item.TeamTwoName)</p>
+                        </div>
+                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" style="color: gray">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+@*                    <a asp-action="Index" asp-controller="GameResults" asp-route-gameId="@item.Id" class="btn btn-secondary">Rezultati</a>
+*@                </div>
+            </div>
+        </div>
+    }
+</div>
+
 <div class="pagination d-flex justify-content-center">
     <ul class="pagination">
         @if (Model.PageNumber > 1)

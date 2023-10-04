@@ -4,21 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Moje Igre</h1>
-
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Pretraži po timu: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
+<div class="pt-2">
+    <div class="d-md-flex justify-content-between align-items-center">
+        <h1 class="mb-3 mb-md-0">MOJE IGRE</h1>
+        <form asp-action="Index" method="get" class="d-flex">
+            <div class="form-group flex-grow-1 mr-2">
+                <label for="SearchString" class="sr-only">Pretraži po timu:</label>
+                <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Pretraži po timu" value="@ViewData["CurrentFilter"]" />
+            </div>
+            <button type="submit" class="btn btn-primary">Traži</button>
+            <a asp-action="Index" class="btn btn-secondary ml-2">Očisti</a>
+        </form>
     </div>
-</form>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container p-0 d-flex justify-content-center">
+    <a asp-action="Create" class="cool-button">NOVA IGRA</a>
+</div>
 
 <div class="row">
     @foreach (var item in Model)
@@ -43,11 +45,17 @@
                             <p>@Html.DisplayFor(modelItem => item.TeamTwoName)</p>
                         </div>
                     </div>
-                    <a asp-action="Edit" asp-route-id="@item.Id" style="color: gray">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                    </a>
-@*                    <a asp-action="Index" asp-controller="GameResults" asp-route-gameId="@item.Id" class="btn btn-secondary">Rezultati</a>
-*@                </div>
+                    <hr />
+                    <div style="width: 100%;" class="d-flex justify-content-end">
+                        <a asp-action="Edit" asp-route-id="@item.Id" style="color: gray">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </div>
+
+
+                    @*                    <a asp-action="Index" asp-controller="GameResults" asp-route-gameId="@item.Id" class="btn btn-secondary">Rezultati</a>
+                *@
+                </div>
             </div>
         </div>
     }

@@ -29,3 +29,24 @@ body {
     .enlarge-card:hover {
         transform: scale(1.03);
     }
+
+.cool-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 15px 0;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background: rgb(65,137,218);
+    background: linear-gradient(90deg, rgba(65,137,218,1) 0%, rgba(34,103,199,1) 25%, rgba(37,77,148,1) 50%, rgba(37,77,148,1) 50%, rgba(34,103,199,1) 75%, rgba(65,137,218,1) 100%);
+    background-size: 200% auto;
+    color: #fff;
+    border-radius: 20px;
+    width: 10rem;
+    transition: background-position 0.3s ease;
+}
+
+    .cool-button:hover {
+        background-position: right center;
+        color: #fff;
+    }

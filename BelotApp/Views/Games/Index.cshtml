@@ -6,7 +6,7 @@
 
 <div class="mb-2 mb-1 p-3">
     <div class="d-md-flex justify-content-between align-items-center text-center">
-        <h1 class="mb-3 mb-md-0">MOJE IGRE</h1>
+        <p class="mb-3 mb-md-0 title">MOJE IGRE</p>
         <form asp-action="Index" method="get" class="d-flex">
             <a asp-action="Create" class="btn btn-primary me-2 round-btn"><i class="fa-solid fa-plus"></i></a>
             <div class="flex-grow-1 mr-2">
@@ -21,37 +21,35 @@
     @foreach (var item in Model)
     {
         <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm enlarge-card" style="min-width: 265px; border-radius: 20px;">
-                <div class="card-img-top" style="background: #2C75C8; height: 100px; display: flex; justify-content: center; align-items: center; border-radius: 20px">
-                    <h4 class="text-white">@Html.DisplayFor(modelItem => item.PlayedAt)</h4>
-                </div>
-                <div class="card-body" style="width: 100%;">
-                    <div class="d-flex flex-wrap">
-                        <div class="col text-center">
-                            <p>TIM 1</p>
-                            <p>@Html.DisplayFor(modelItem => item.TeamOneName)</p>
+            <a href="@Url.Action("Index", "GameResults", new { gameId = item.Id })" class="card-link">
+                <div class="card border-0 shadow-sm enlarge-card" style="min-width: 265px; border-radius: 20px;">
+                    <div class="card-img-top" style="background: #2C75C8; height: 100px; display: flex; justify-content: center; align-items: center; border-radius: 20px">
+                        <h4 class="text-white">@Html.DisplayFor(modelItem => item.PlayedAt)</h4>
+                    </div>
+                    <div class="card-body" style="width: 100%;">
+                        <div class="d-flex flex-wrap">
+                            <div class="col text-center">
+                                <p class="card-header-text">TIM</p>
+                                <p class="card-content">@Html.DisplayFor(modelItem => item.TeamOneName)</p>
+                            </div>
+                            <div class="col text-center">
+                                <p class="card-header-text">POBJEDNIK</p>
+                                <p class="card-content">@Html.DisplayFor(modelItem => item.Winner)</p>
+                            </div>
+                            <div class="col text-center">
+                                <p class="card-header-text">TIM</p>
+                                <p class="card-content">@Html.DisplayFor(modelItem => item.TeamTwoName)</p>
+                            </div>
                         </div>
-                        <div class="col text-center">
-                            <p>Pobjednik</p>
-                            <p>@Html.DisplayFor(modelItem => item.Winner)</p>
-                        </div>
-                        <div class="col text-center">
-                            <p>TIM 2</p>
-                            <p>@Html.DisplayFor(modelItem => item.TeamTwoName)</p>
+                        <hr />
+                        <div style="width: 100%;" class="d-flex justify-content-end">
+                            <a asp-action="Edit" asp-route-id="@item.Id" style="color: gray">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
                         </div>
                     </div>
-                    <hr />
-                    <div style="width: 100%;" class="d-flex justify-content-end">
-                        <a asp-action="Edit" asp-route-id="@item.Id" style="color: gray">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                        </a>
-                    </div>
-
-
-                    @*                    <a asp-action="Index" asp-controller="GameResults" asp-route-gameId="@item.Id" class="btn btn-secondary">Rezultati</a>
-                *@
                 </div>
-            </div>
+            </a>
         </div>
     }
 </div>

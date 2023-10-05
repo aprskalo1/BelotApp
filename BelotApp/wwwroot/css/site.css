@@ -20,6 +20,12 @@ html {
 body {
     margin-bottom: 60px;
     background-color: #FCFCFC;
+    font-family: Roboto;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit
 }
 
 .enlarge-card {
@@ -32,4 +38,22 @@ body {
 
 .round-btn {
     border-radius: 50%;
+}
+
+.title {
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    color: #ffff;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.card-header-text {
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+    color: #ffff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.card-content {
+    font-size: 16px;
 }

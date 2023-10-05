@@ -29,3 +29,7 @@ body {
     .enlarge-card:hover {
         transform: scale(1.03);
     }
+
+.round-btn {
+    border-radius: 50%;
+}

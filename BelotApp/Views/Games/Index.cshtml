@@ -4,22 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="pt-2">
+<div class="pt-2 pb-4">
     <div class="d-md-flex justify-content-between align-items-center">
         <h1 class="mb-3 mb-md-0">MOJE IGRE</h1>
         <form asp-action="Index" method="get" class="d-flex">
+            <a asp-action="Create" class="btn btn-primary me-2"><i class="fa-solid fa-plus"></i></a>
             <div class="form-group flex-grow-1 mr-2">
-                <label for="SearchString" class="sr-only">Pretraži po timu:</label>
                 <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Pretraži po timu" value="@ViewData["CurrentFilter"]" />
             </div>
             <button type="submit" class="btn btn-primary">Traži</button>
             <a asp-action="Index" class="btn btn-secondary ml-2">Očisti</a>
         </form>
     </div>
-</div>
-
-<div class="container p-0 d-flex justify-content-center">
-    <a asp-action="Create" class="cool-button">NOVA IGRA</a>
 </div>
 
 <div class="row">

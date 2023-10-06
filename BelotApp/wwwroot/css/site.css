@@ -51,7 +51,7 @@ body {
 }
 
 .custom-shadow {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .card-header-text {

@@ -67,19 +67,16 @@
                 }
             });
 
-            // Function to calculate and fill the opposite field
             function calculateOppositeField(inputField, oppositeField) {
-                var userInput = $(inputField).val();
-                var calculatedValue = 162 - parseInt(userInput);
+                var userInput = parseInt($(inputField).val()) || 0; // Ensure userInput is a number
+                var calculatedValue = Math.max(162 - userInput, 0); // Ensure calculatedValue doesn't go below 0
                 $(oppositeField).val(calculatedValue);
             }
 
-            // Attach event listener to Team One input field
             $('#TeamOneResult').on('input', function () {
                 calculateOppositeField('#TeamOneResult', '#TeamTwoResult');
             });
 
-            // Attach event listener to Team Two input field
             $('#TeamTwoResult').on('input', function () {
                 calculateOppositeField('#TeamTwoResult', '#TeamOneResult');
             });

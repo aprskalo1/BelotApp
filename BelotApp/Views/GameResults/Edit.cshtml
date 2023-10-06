@@ -95,6 +95,20 @@
                     $("#combinationCallDiv").slideDown();
                 }
             });
+
+            function calculateOppositeField(inputField, oppositeField) {
+                var userInput = parseInt($(inputField).val()) || 0; 
+                var calculatedValue = Math.max(162 - userInput, 0); 
+                $(oppositeField).val(calculatedValue);
+            }
+
+            $('#TeamOneResult').on('input', function () {
+                calculateOppositeField('#TeamOneResult', '#TeamTwoResult');
+            });
+
+            $('#TeamTwoResult').on('input', function () {
+                calculateOppositeField('#TeamTwoResult', '#TeamOneResult');
+            });
         });
     </script>
 }

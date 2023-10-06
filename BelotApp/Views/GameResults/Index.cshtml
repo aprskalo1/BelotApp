@@ -46,11 +46,19 @@
                     }
                     else
                     {
-                        if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
+                        if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName != item.CombinationCall && item.TeamOneResult <= (item.Combination + 162) / 2)
                         {
                             teamOnePass = false;
                         }
-                        else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult + item.Combination <= (item.Combination + 162) / 2)
+                        else if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName != item.CombinationCall && item.TeamTwoResult <= (item.Combination + 162) / 2)
+                        {
+                            teamTwoPass = false;
+                        }
+                        else if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
+                        {
+                            teamOnePass = false;
+                        }
+                        else if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName == item.CombinationCall && item.TeamTwoResult + item.Combination <= (item.Combination + 162) / 2)
                         {
                             teamTwoPass = false;
                         }

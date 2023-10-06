@@ -51,13 +51,13 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         $(document).ready(function () {
             $("#combinationCallDiv").hide();
-        }); 
-        $(document).ready(function () {
+
             $("#Combination").keyup(function () {
                 if ($("#Combination").val() == "") {
                     $("#combinationCallDiv").slideUp();
@@ -65,6 +65,23 @@
                 else {
                     $("#combinationCallDiv").slideDown();
                 }
+            });
+
+            // Function to calculate and fill the opposite field
+            function calculateOppositeField(inputField, oppositeField) {
+                var userInput = $(inputField).val();
+                var calculatedValue = 162 - parseInt(userInput);
+                $(oppositeField).val(calculatedValue);
+            }
+
+            // Attach event listener to Team One input field
+            $('#TeamOneResult').on('input', function () {
+                calculateOppositeField('#TeamOneResult', '#TeamTwoResult');
+            });
+
+            // Attach event listener to Team Two input field
+            $('#TeamTwoResult').on('input', function () {
+                calculateOppositeField('#TeamTwoResult', '#TeamOneResult');
             });
         });
     </script>

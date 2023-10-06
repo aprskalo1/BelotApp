@@ -42,10 +42,16 @@ body {
 }
 
 .title {
+    display: flex;
+    justify-content: center;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
     color: #ffff;
     font-weight: bold;
     font-size: 40px;
+}
+
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-header-text {
@@ -87,3 +93,13 @@ body {
         #results-table tr:last-child {
             background-color: #2C75C8;
         }
+
+.input-form {
+    width: 95%;
+}
+
+@media (min-width: 768px) {
+    .input-form {
+        width: 50%;
+    }
+}

@@ -4,32 +4,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>GameResult</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="d-flex flex-wrap flex-column justify-content-center align-content-center">
+    <div class="title">Novi rezultat</div>
+    <hr />
+    <div class="row input-form">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TeamOneResult" class="control-label">@ViewBag.TeamOneName</label>
-                <input asp-for="TeamOneResult" class="form-control" />
+                <input asp-for="TeamOneResult" class="form-control border-0 custom-shadow bg-white" />
                 <span asp-validation-for="TeamOneResult" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TeamTwoResult" class="control-label">@ViewBag.TeamTwoName</label>
-                <input asp-for="TeamTwoResult" class="form-control" />
+                <input asp-for="TeamTwoResult" class="form-control border-0 custom-shadow bg-white" />
                 <span asp-validation-for="TeamTwoResult" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Combination" class="control-label"></label>
-                <input asp-for="Combination" class="form-control" />
+                <input asp-for="Combination" class="form-control border-0 custom-shadow bg-white" />
                 <span asp-validation-for="Combination" class="text-danger"></span>
             </div>
             <div class="form-group" id="combinationCallDiv">
                 <label asp-for="CombinationCall" class="control-label"></label>
-                <select asp-for="CombinationCall" class="form-control">
+                <select asp-for="CombinationCall" class="form-control border-0 custom-shadow bg-white">
                     <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
                     <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
                 </select>
@@ -37,14 +35,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="TrumpCall" class="control-label"></label>
-                <select asp-for="TrumpCall" class="form-control">
+                <select asp-for="TrumpCall" class="form-control border-0 custom-shadow bg-white">
                     <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
                     <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
                 </select>
                 <span asp-validation-for="TrumpCall" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Spremi" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -20,7 +20,6 @@
                     <th>
                         @ViewBag.TeamTwoName
                     </th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -64,7 +63,7 @@
                         }
                     }
 
-                    <tr>
+                    <tr onclick="location.href='@Url.Action("Edit", new { id = item.Id })'" style="cursor:pointer;">
                         <td>
                             @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
                             {
@@ -185,11 +184,6 @@
                                 }
                             }
                         </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="fa-regular fa-pen-to-square" style="color: white;"></i>
-                            </a>
-                        </td>
                     </tr>
                 }
 
@@ -214,7 +208,6 @@
                             @teamTwoResultsSum
                         }
                     </td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>

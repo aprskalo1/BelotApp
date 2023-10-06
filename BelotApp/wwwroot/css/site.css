@@ -57,3 +57,30 @@ body {
 .card-content {
     font-size: 16px;
 }
+
+#results-table {
+    margin-top: 1rem;
+    min-width: 15rem;
+    max-width: 30rem;
+    border: 1px solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+td, th {
+    width: 10rem;
+    text-align: center;
+    border: 1px solid;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+}
+
+tr {
+    background-color: #4F8FD8;
+}
+
+    tr:last-child {
+        background-color: #2C75C8;
+    }

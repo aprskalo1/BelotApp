@@ -4,209 +4,223 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-center w-100 title">
+    REZULTATI
+</div>
 
 @{
     int? teamOneResultsSum = 0;
     int? teamTwoResultsSum = 0;
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @ViewBag.TeamOneName
-                </th>
-                <th>
-                    @ViewBag.TeamTwoName
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Combination)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+
+    <div class="d-flex justify-content-center align-content-center w-100">
+        <table class="table shadow-lg" id="results-table">
+            <thead>
+                <tr>
+                    <th>
+                        @ViewBag.TeamOneName
+                    </th>
+                    <th>
+                        @ViewBag.TeamTwoName
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
 
 
 
-        <tbody>
-            @foreach (var item in Model)
-            {
-                bool teamOnePass = true;
-                bool teamTwoPass = true;
-
-                if (item.Combination == 0)
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= 162 / 2)
+                    bool teamOnePass = true;
+                    bool teamTwoPass = true;
+
+                    if (item.Combination == 0)
                     {
-                        teamOnePass = false;
+                        if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult <= 162 / 2)
+                        {
+                            teamOnePass = false;
+                        }
+                        else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult <= 162 / 2)
+                        {
+                            teamTwoPass = false;
+                        }
                     }
-                    else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult <= 162 / 2)
+                    else
                     {
-                        teamTwoPass = false;
+                        if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
+                        {
+                            teamOnePass = false;
+                        }
+                        else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult + item.Combination <= (item.Combination + 162) / 2)
+                        {
+                            teamTwoPass = false;
+                        }
                     }
-                }
-                else
-                {
-                    if (ViewBag.TeamOneName == item.TrumpCall && item.TeamOneResult + item.Combination <= (item.Combination + 162) / 2)
-                    {
-                        teamOnePass = false;
-                    }
-                    else if (ViewBag.TeamTwoName == item.TrumpCall && item.TeamTwoResult + item.Combination <= (item.Combination + 162) / 2)
-                    {
-                        teamTwoPass = false;
-                    }
+
+                    <tr>
+                        <td>
+                            @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
+                            {
+                                if (item.TeamOneResult + item.Combination > (item.Combination + 162) / 2)
+                                {
+                                    var result = item.TeamOneResult + item.Combination;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }
+                            }
+                            else if (ViewBag.TeamOneName == item.CombinationCall && ViewBag.TeamOneName != item.TrumpCall)
+                            {
+                                int? result;
+                                if (!teamTwoPass)
+                                {
+                                    result = 162 + item.Combination;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    result = item.TeamOneResult + item.Combination;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                            }
+                            else if (ViewBag.TeamOneName != item.CombinationCall && ViewBag.TeamOneName == item.TrumpCall)
+                            {
+                                if (item.TeamOneResult > (item.Combination + 162) / 2)
+                                {
+                                    var result = item.TeamOneResult;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }
+                            }
+                            else
+                            {
+                                int? result;
+                                if (!teamTwoPass)
+                                {
+                                    result = 162 + item.Combination;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    result = item.TeamOneResult;
+                                    teamOneResultsSum += result;
+                                    @result
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName == item.CombinationCall)
+                            {
+                                if (item.TeamTwoResult + item.Combination > (item.Combination + 162) / 2)
+                                {
+                                    var result = item.TeamTwoResult + item.Combination;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }
+                            }
+                            else if (ViewBag.TeamTwoName == item.CombinationCall && ViewBag.TeamTwoName != item.TrumpCall)
+                            {
+                                int? result;
+                                if (!teamOnePass)
+                                {
+                                    result = 162 + item.Combination;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    result = item.TeamTwoResult + item.Combination;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                            }
+                            else if (ViewBag.TeamTwoName != item.CombinationCall && ViewBag.TeamTwoName == item.TrumpCall)
+                            {
+                                if (item.TeamTwoResult > (item.Combination + 162) / 2)
+                                {
+                                    var result = item.TeamTwoResult;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }
+                            }
+                            else
+                            {
+                                int? result;
+                                if (!teamOnePass)
+                                {
+                                    result = 162 + item.Combination;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                                else
+                                {
+                                    result = item.TeamTwoResult;
+                                    teamTwoResultsSum += result;
+                                    @result
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="fa-regular fa-pen-to-square" style="color: white;"></i>
+                            </a>
+                        </td>
+                    </tr>
                 }
 
                 <tr>
                     <td>
-                        @if (ViewBag.TeamOneName == item.TrumpCall && ViewBag.TeamOneName == item.CombinationCall)
+                        @if (teamOneResultsSum == 0)
                         {
-                            if (item.TeamOneResult + item.Combination > (item.Combination + 162) / 2)
-                            {
-                                var result = item.TeamOneResult + item.Combination;
-                                teamOneResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                @Html.Raw("-")
-                            }
-                        }
-                        else if (ViewBag.TeamOneName == item.CombinationCall && ViewBag.TeamOneName != item.TrumpCall)
-                        {
-                            int? result;
-                            if (!teamTwoPass)
-                            {
-                                result = 162 + item.Combination;
-                                teamOneResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                result = item.TeamOneResult + item.Combination;
-                                teamOneResultsSum += result;
-                                @result
-                            }
-                        }
-                        else if (ViewBag.TeamOneName != item.CombinationCall && ViewBag.TeamOneName == item.TrumpCall)
-                        {
-                            if (item.TeamOneResult > (item.Combination + 162) / 2)
-                            {
-                                var result = item.TeamOneResult;
-                                teamOneResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                @Html.Raw("-")
-                            }
+                            @Html.Raw("-")
                         }
                         else
                         {
-                            int? result;
-                            if (!teamTwoPass)
-                            {
-                                result = 162 + item.Combination;
-                                teamOneResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                result = item.TeamOneResult;
-                                teamOneResultsSum += result;
-                                @result
-                            }
+                            @teamOneResultsSum
                         }
                     </td>
                     <td>
-                        @if (ViewBag.TeamTwoName == item.TrumpCall && ViewBag.TeamTwoName == item.CombinationCall)
+                        @if (teamTwoResultsSum == 0)
                         {
-                            if (item.TeamTwoResult + item.Combination > (item.Combination + 162) / 2)
-                            {
-                                var result = item.TeamTwoResult + item.Combination;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                @Html.Raw("-")
-                            }
-                        }
-                        else if (ViewBag.TeamTwoName == item.CombinationCall && ViewBag.TeamTwoName != item.TrumpCall)
-                        {
-                            int? result;
-                            if (!teamOnePass)
-                            {
-                                result = 162 + item.Combination;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                result = item.TeamTwoResult + item.Combination;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
-                        }
-                        else if (ViewBag.TeamTwoName != item.CombinationCall && ViewBag.TeamTwoName == item.TrumpCall)
-                        {
-                            if (item.TeamTwoResult > (item.Combination + 162) / 2)
-                            {
-                                var result = item.TeamTwoResult;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                @Html.Raw("-")
-                            }
+                            @Html.Raw("-")
                         }
                         else
                         {
-                            int? result;
-                            if (!teamOnePass)
-                            {
-                                result = 162 + item.Combination;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
-                            else
-                            {
-                                result = item.TeamTwoResult;
-                                teamTwoResultsSum += result;
-                                @result
-                            }
+                            @teamTwoResultsSum
                         }
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Combination)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    </td>
+                    <td></td>
                 </tr>
-            }
-
-            <tr>
-                <td>
-                    @teamOneResultsSum
-                </td>
-                <td>
-                    @teamTwoResultsSum
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <p>
+            </tbody>
+        </table>
+    </div>
+    <div class="w-100 d-flex justify-content-center">
         @{
             if (teamOneResultsSum < ViewBag.GameLength && teamTwoResultsSum < ViewBag.GameLength)
             {
-                <a asp-action="Create">Create New</a>
+                <a asp-action="Create" class="btn btn-primary round-btn"><i class="fa-solid fa-plus"></i></a>
             }
         }
-    </p>
+    </div>
 }
 
 <div class="modal fade" id="winnerPopUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

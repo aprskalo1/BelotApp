@@ -4,36 +4,33 @@
     ViewData["Title"] = "Kontakt";
 }
 
-<h1>Kontakt</h1>
-
-<div class="container">
+<div class="d-flex flex-wrap flex-column justify-content-center align-content-center">
+    <div class="title">Kontakt</div>
+    <hr />
     <p>Kontaktiraj developera: <a href="mailto:ante.prskalo4@gmail.com">ante.prskalo4@gmail.com</a></p>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <form id="bugReportForm" method="post" asp-action="SubmitReport" asp-controller="Contacts">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Subject" class="control-label"></label>
-                        <input asp-for="Subject" class="form-control" />
-                        <span asp-validation-for="Subject" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <textarea asp-for="Description" class="form-control"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Pošalji" class="btn btn-primary">
-                    </div>
-                </form>
+    <div class="row input-form">
+        <h3 class="mt-2 custom-text-shadow">Prijavi problem</h3>
+        <form id="bugReportForm" method="post" asp-action="SubmitReport" asp-controller="Contacts">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control border-0 custom-shadow bg-white" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control border-0 custom-shadow bg-white" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control border-0 custom-shadow bg-white"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Pošalji" class="btn btn-primary">
+            </div>
+        </form>
     </div>
 </div>
 

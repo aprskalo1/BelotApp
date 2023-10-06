@@ -54,6 +54,10 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
+.custom-text-shadow {
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
 .card-header-text {
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
     color: #ffff;

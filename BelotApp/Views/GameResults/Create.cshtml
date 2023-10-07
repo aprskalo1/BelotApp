@@ -12,22 +12,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TeamOneResult" class="control-label">@ViewBag.TeamOneName</label>
-                <input asp-for="TeamOneResult" class="form-control border-0 custom-shadow bg-white" />
+                <input asp-for="TeamOneResult" class="form-control border-0 custom-shadow bg-white mb-2" />
                 <span asp-validation-for="TeamOneResult" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TeamTwoResult" class="control-label">@ViewBag.TeamTwoName</label>
-                <input asp-for="TeamTwoResult" class="form-control border-0 custom-shadow bg-white" />
+                <input asp-for="TeamTwoResult" class="form-control border-0 custom-shadow bg-white mb-2" />
                 <span asp-validation-for="TeamTwoResult" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Combination" class="control-label"></label>
-                <input asp-for="Combination" class="form-control border-0 custom-shadow bg-white" />
+                <input asp-for="Combination" class="form-control border-0 custom-shadow bg-white mb-2" />
                 <span asp-validation-for="Combination" class="text-danger"></span>
             </div>
             <div class="form-group" id="combinationCallDiv">
                 <label asp-for="CombinationCall" class="control-label"></label>
-                <select asp-for="CombinationCall" class="form-control border-0 custom-shadow bg-white">
+                <select asp-for="CombinationCall" class="form-control border-0 custom-shadow bg-white mb-2">
                     <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
                     <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
                 </select>

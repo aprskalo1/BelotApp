@@ -1,0 +1,30 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<div class="mx-auto">
+    <div class="title">Moj račun</div>
+
+    <div class="container">
+        <hr />
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div id="edit-profile" class="col-md-6">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

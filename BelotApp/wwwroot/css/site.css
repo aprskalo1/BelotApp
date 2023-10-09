@@ -107,3 +107,7 @@ body {
         width: 40rem;
     }
 }
+
+#edit-profile .col-md-6 {
+    flex: auto;
+}

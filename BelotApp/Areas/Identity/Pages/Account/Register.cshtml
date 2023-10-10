@@ -28,9 +28,9 @@
                 </form>
             </section>
 
-            <div class="text-center position-relative mt-2 mb-2">
+            <div class="text-center position-relative">
                 <hr class="mx-auto w-75">
-                <span class="position-absolute top-50 start-50 translate-middle p-2" style="background: white;">ILI</span>
+                <span class="position-absolute top-50 start-50 translate-middle ps-2 pe-2" style="background: white;">ILI</span>
             </div>
 
             <section>
@@ -50,7 +50,7 @@
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins!)
                                     {
-                                        <button type="submit" class="w-100 btn btn-lg btn-light shadow-sm mt-2 d-flex justify-content-around align-items-center text-secondary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-google" style="color: #0d6efd;"></i> NASTAVI S GOOGLE RAČUNOM</button>
+                                        <button type="submit" class="w-100 btn btn-lg btn-light shadow-sm d-flex justify-content-around align-items-center text-secondary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-google" style="color: #0d6efd;"></i> NASTAVI S GOOGLE RAČUNOM</button>
                                     }
                                 </p>
                             </div>

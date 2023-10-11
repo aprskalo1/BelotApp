@@ -72,7 +72,7 @@ namespace BelotApp.Areas.Identity.Pages.Account
 
             MailMessage mm = new MailMessage("infobeloteapp@gmail.com", email);
             mm.Subject = "Potvrda računa";
-            mm.Body = $"Poštovani/a {user.UserName},<br><br>Hvala vam na korištenju naših usluga. Kako biste potvrdili svoj račun, molimo vas da kliknete na sljedeću poveznicu:<br><br><a href=\"{EmailConfirmationUrl}\">Potvrdi račun</a><br><br>S poštovanjem,<br>Vaša BeloteApp ekipa";
+            mm.Body = $"Poštovani/a {user.UserName},<br><br>Hvala vam na korištenju naših usluga. Kako biste potvrdili svoj račun, molimo vas da kliknete na sljedeću poveznicu:<br><br><a href=\"{EmailConfirmationUrl}\">Potvrdi račun</a><br><br>S poštovanjem,<br>Vaš BelotBlok.";
             mm.IsBodyHtml = true;
 
             SmtpClient smtpClient = new SmtpClient();

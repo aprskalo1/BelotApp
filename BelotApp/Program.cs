@@ -112,6 +112,7 @@ using (var scope = app.Services.CreateScope())
         {
             UserName = email,
             Email = email,
+            EmailConfirmed = true
         };
 
         await userManager.CreateAsync(user, password!);

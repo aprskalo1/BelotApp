@@ -132,7 +132,15 @@ namespace BelotApp.Controllers
 
             if (ModelState.IsValid)
             {
-                game.UserId = _userManager.GetUserId(User);
+                if (User.IsInRole("Admin"))
+                {
+                    game.UserId = await _context.Games.Where(g => g.Id == id).Select(g => g.UserId).FirstOrDefaultAsync();
+
+                }
+                else
+                {
+                    game.UserId = _userManager.GetUserId(User);
+                }
                 game.PlayedAt = DateTime.Now;
 
                 try

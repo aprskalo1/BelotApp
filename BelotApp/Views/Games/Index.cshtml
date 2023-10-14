@@ -23,11 +23,13 @@
 <div class="row">
     @foreach (var item in Model)
     {
+        var playedAtDate = item.PlayedAt.ToShortDateString();
+
         <div class="col-lg-4 col-md-6 mb-4">
             <a href="@Url.Action("Index", "GameResults", new { gameId = item.Id })" class="card-link">
                 <div class="card border-0 shadow-sm enlarge-card" style="min-width: 265px; border-radius: 20px;">
                     <div class="card-img-top" style="background: #2C75C8; height: 100px; display: flex; justify-content: center; align-items: center; border-radius: 20px">
-                        <h4 class="text-white">@Html.DisplayFor(modelItem => item.PlayedAt)</h4>
+                        <h4 class="text-white">@playedAtDate</h4>
                     </div>
                     <div class="card-body" style="width: 100%;">
                         <div class="d-flex flex-wrap">

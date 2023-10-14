@@ -23,7 +23,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        var playedAtDate = item.PlayedAt.ToShortDateString();
+        var playedAtDate = item.PlayedAt.ToString("dd/MM/yyyy");
 
         <div class="col-lg-4 col-md-6 mb-4">
             <a href="@Url.Action("Index", "GameResults", new { gameId = item.Id })" class="card-link">

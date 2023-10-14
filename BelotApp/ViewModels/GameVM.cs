@@ -9,12 +9,12 @@ namespace BelotApp.ViewModels
 
         [DisplayName("Prvi tim")]
         [StringLength(50)]
-        [Required]
+        [Required(ErrorMessage = "Ovo polje je obavezno.")]
         public string? TeamOneName { get; set; }
 
         [DisplayName("Drugi tim")]
         [StringLength(50)]
-        [Required]
+        [Required(ErrorMessage = "Ovo polje je obavezno.")]
         public string? TeamTwoName { get; set; }
 
         [DisplayName("Datum")]
@@ -24,7 +24,7 @@ namespace BelotApp.ViewModels
         public string? Winner { get; set; }
 
         [DisplayName("Trajanje")]
-        [Required]
+        [Required(ErrorMessage = "Ovo polje je obavezno.")]
         public int? GameLength { get; set; }
     }
 }

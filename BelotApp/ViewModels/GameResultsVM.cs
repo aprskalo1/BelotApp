@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BelotApp.ViewModels
 {
@@ -8,8 +9,10 @@ namespace BelotApp.ViewModels
 
         public int GameId { get; set; }
 
+        [Required(ErrorMessage = "Ovo polje je obavezno.")]
         public int TeamOneResult { get; set; }
 
+        [Required(ErrorMessage = "Ovo polje je obavezno.")]
         public int TeamTwoResult { get; set; }
 
         [DisplayName("Adut od:")]

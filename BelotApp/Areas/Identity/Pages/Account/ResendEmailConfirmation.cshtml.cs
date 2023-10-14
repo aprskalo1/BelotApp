@@ -45,8 +45,8 @@ namespace BelotApp.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Ovo polje je obavezno.")]
+            [EmailAddress(ErrorMessage = "Polje e-pošte nije važeća adresa e-pošte.")]
             public string Email { get; set; }
         }
 
@@ -64,7 +64,7 @@ namespace BelotApp.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+                ModelState.AddModelError(string.Empty, "E-pošta za potvrdu poslana. Provjerite svoju e-poštu.");
                 return Page();
             }
 
@@ -92,7 +92,7 @@ namespace BelotApp.Areas.Identity.Pages.Account
             smtpClient.Credentials = nc;
             smtpClient.Send(mm);
 
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "E-pošta za potvrdu poslana. Provjerite svoju e-poštu.");
             return Page();
         }
     }

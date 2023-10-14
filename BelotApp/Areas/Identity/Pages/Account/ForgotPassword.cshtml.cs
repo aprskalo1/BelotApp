@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace BelotApp.Areas.Identity.Pages.Account
 {
@@ -45,8 +46,8 @@ namespace BelotApp.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Ovo polje je obavezno.")]
+            [EmailAddress(ErrorMessage = "Polje e-pošte nije važeća adresa e-pošte.")]
             public string Email { get; set; }
         }
 

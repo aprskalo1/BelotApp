@@ -89,12 +89,12 @@ namespace BelotApp.Areas.Identity.Pages.Account.Manage
             var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not removed.";
+                StatusMessage = "Vanjska prijava nije uklonjena.";
                 return RedirectToPage();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "The external login was removed.";
+            StatusMessage = "Vanjska prijava je uklonjena.";
             return RedirectToPage();
         }
 
@@ -127,14 +127,14 @@ namespace BelotApp.Areas.Identity.Pages.Account.Manage
             var result = await _userManager.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not added. External logins can only be associated with one account.";
+                StatusMessage = "Vanjska prijava nije dodana. Vanjske prijave mogu se povezati samo s jednim računom.";
                 return RedirectToPage();
             }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            StatusMessage = "Vanjska usluga prijave dodana.";
             return RedirectToPage();
         }
     }

@@ -84,7 +84,7 @@ namespace BelotApp.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required(ErrorMessage = "Ovo polje je obavezno.")]
-            [StringLength(100, ErrorMessage = "{0} može imati najmanje {2} a najviše {1} znakova.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Lozinka može imati najmanje {2} a najviše {1} znakova.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }

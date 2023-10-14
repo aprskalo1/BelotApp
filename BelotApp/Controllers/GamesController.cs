@@ -46,7 +46,10 @@ namespace BelotApp.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                games = games.Where(g => g.TeamOneName!.Contains(searchString) || g.TeamTwoName!.Contains(searchString)).ToList();
+                games = games
+                    .Where(g => g.TeamOneName != null && g.TeamOneName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
+                             || g.TeamTwoName != null && g.TeamTwoName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .ToList();
             }
 
             var gamesVM = _mapper.Map<List<GameVM>>(games);

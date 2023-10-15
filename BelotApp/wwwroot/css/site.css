@@ -74,9 +74,9 @@ body {
 }
 
 .card-header-text {
-    text-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.9);
+    text-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.9);
     color: #ffff;
-    font-weight: bold;
+    font-family: roboto-black;
     font-size: 18px;
 }
 
@@ -102,7 +102,7 @@ body {
         color: #ffff;
         font-family: roboto-black;
         font-size: 18px;
-        text-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.9);
+        text-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.9);
     }
 
     #results-table tr {

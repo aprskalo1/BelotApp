@@ -88,8 +88,15 @@ namespace BelotApp.Controllers
         public async Task<IActionResult> Create(GameVM gameVM)
         {
             var game = _mapper.Map<Game>(gameVM);
+
             if (ModelState.IsValid)
             {
+                if (gameVM.TeamTwoName != null && gameVM.TeamTwoName.Equals(gameVM.TeamOneName, StringComparison.OrdinalIgnoreCase))
+                {
+                    ModelState.AddModelError(nameof(GameVM.TeamTwoName), "Timovi ne mogu imati isto ime.");
+                    return View(gameVM);
+                }
+
                 game.UserId = _userManager.GetUserId(User);
                 game.PlayedAt = DateTime.Now;
 
@@ -145,6 +152,12 @@ namespace BelotApp.Controllers
                     game.UserId = _userManager.GetUserId(User);
                 }
                 game.PlayedAt = DateTime.Now;
+
+                if (gameVM.TeamTwoName != null && gameVM.TeamTwoName.Equals(gameVM.TeamOneName, StringComparison.OrdinalIgnoreCase))
+                {
+                    ModelState.AddModelError(nameof(GameVM.TeamTwoName), "Timovi ne mogu imati isto ime.");
+                    return View(gameVM);
+                }
 
                 try
                 {

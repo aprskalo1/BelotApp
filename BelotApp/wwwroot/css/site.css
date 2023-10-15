@@ -60,7 +60,7 @@ body {
     font-family: roboto-black;
     display: flex;
     justify-content: center;
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    text-shadow: 0px 0px 0.6rem rgba(0, 0, 0, 0.6);
     color: #ffff;
     font-size: 40px;
 }
@@ -70,11 +70,11 @@ body {
 }
 
 .custom-text-shadow {
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 0px 0px 0.6rem rgba(0, 0, 0, 0.2);
 }
 
 .card-header-text {
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+    text-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.9);
     color: #ffff;
     font-weight: bold;
     font-size: 18px;
@@ -102,7 +102,7 @@ body {
         color: #ffff;
         font-family: roboto-black;
         font-size: 18px;
-        text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        text-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.9);
     }
 
     #results-table tr {

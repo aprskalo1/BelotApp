@@ -1,7 +1,7 @@
 ﻿@model BelotApp.ViewModels.GameResultsVM
 
 <div class="d-flex flex-wrap flex-column justify-content-center align-content-center">
-    <div class="title">Novi rezultat</div>
+    <div class="title">Uredi rezultat</div>
     <hr />
     <div class="row input-form">
         <form asp-action="Edit">
@@ -31,12 +31,30 @@
                 <span asp-validation-for="CombinationCall" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="BelaCall" class="control-label"></label>
+                <select asp-for="BelaCall" class="form-control border-0 custom-shadow bg-white mb-2">
+                    <option value="">Nema</option>
+                    <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
+                    <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
+                </select>
+                <span asp-validation-for="BelaCall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="TrumpCall" class="control-label"></label>
                 <select asp-for="TrumpCall" class="form-control border-0 custom-shadow bg-white mb-2">
                     <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
                     <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
                 </select>
                 <span asp-validation-for="TrumpCall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapoteCall" class="control-label"></label>
+                <select asp-for="CapoteCall" class="form-control border-0 custom-shadow bg-white mb-2">
+                    <option value="">Nema</option>
+                    <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
+                    <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
+                </select>
+                <span asp-validation-for="CapoteCall" class="text-danger"></span>
             </div>
             <div class="form-group mt-2">
                 <input type="submit" value="Spremi" class="btn btn-primary" />
@@ -99,6 +117,27 @@
 
             $('#TeamTwoResult').on('input', function () {
                 calculateOppositeField('#TeamTwoResult', '#TeamOneResult');
+            });
+
+            $('#CapoteCall').on('change', function () {
+                if ($('#CapoteCall').val() == '@ViewBag.TeamOneName') {
+                    $('#TeamOneResult').val(0);
+                    $('#TeamTwoResult').val(162);
+                } else if ($('#CapoteCall').val() == '@ViewBag.TeamTwoName') {
+                    $('#TeamOneResult').val(162);
+                    $('#TeamTwoResult').val(0);
+                } else {
+                    $('#TeamOneResult').val('');
+                    $('#TeamTwoResult').val('');
+                }
+            });
+
+            $('#TeamOneResult').on('focus', function () {
+                $('#CapoteCall').val('');
+            });
+
+            $('#TeamTwoResult').on('focus', function () {
+                $('#CapoteCall').val('');
             });
         });
     </script>

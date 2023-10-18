@@ -19,9 +19,15 @@ namespace BelotApp.ViewModels
         public string? TrumpCall { get; set; }
 
         [DisplayName("Zvanja od:")]
-        public string? CombinationCall { get; set; }
+        public string? CombinationCall { get; set; }    
+        
+        [DisplayName("Zvanje bele od:")]
+        public string? BelaCall { get; set; }
 
-        [DisplayName("Zvanja")]
+        [DisplayName("Mački:")]
+        public string? CapoteCall { get; set; }
+
+        [DisplayName("Zvanja:")]
         public int? Combination { get; set; }
     }
 }

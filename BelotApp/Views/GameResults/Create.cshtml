@@ -6,16 +6,48 @@
     <div class="row input-form">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TeamOneResult" class="control-label">@ViewBag.TeamOneName</label>
-                <input asp-for="TeamOneResult" class="form-control border-0 custom-shadow bg-white mb-2" />
-                <span asp-validation-for="TeamOneResult" class="text-danger"></span>
+            <div class="form-group mb-2">
+                <div class="d-flex justify-content-between">
+                    <label asp-for="TeamOneResult" class="control-label">@ViewBag.TeamOneName</label>
+                    <label class="control-label d-flex justify-content-center w-25">Mački?</label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="w-75">
+                        <input asp-for="TeamOneResult" class="form-control border-0 custom-shadow bg-white" />
+                        <span asp-validation-for="TeamOneResult" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center w-25">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="checkboxTeamOneCapote">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TeamTwoResult" class="control-label">@ViewBag.TeamTwoName</label>
-                <input asp-for="TeamTwoResult" class="form-control border-0 custom-shadow bg-white mb-2" />
-                <span asp-validation-for="TeamTwoResult" class="text-danger"></span>
+
+            <div class="form-group visually-hidden">
+                <input asp-for="CapoteCall" class="form-control border-0 custom-shadow bg-white" />
+                <span asp-validation-for="CapoteCall" class="text-danger"></span>
             </div>
+
+            <div class="form-group mb-2">
+                <div class="d-flex justify-content-between">
+                    <label asp-for="TeamTwoResult" class="control-label">@ViewBag.TeamTwoName</label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="w-75">
+                        <input asp-for="TeamTwoResult" class="form-control border-0 custom-shadow bg-white" />
+                        <span asp-validation-for="TeamTwoResult" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center w-25">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="checkboxTeamTwoCapote">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Combination" class="control-label"></label>
                 <input asp-for="Combination" class="form-control border-0 custom-shadow bg-white mb-2" />
@@ -28,6 +60,15 @@
                     <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
                 </select>
                 <span asp-validation-for="CombinationCall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BelaCall" class="control-label"></label>
+                <select asp-for="BelaCall" class="form-control border-0 custom-shadow bg-white mb-2">
+                    <option value="">Nema</option>
+                    <option value="@ViewBag.TeamOneName">@ViewBag.TeamOneName</option>
+                    <option value="@ViewBag.TeamTwoName">@ViewBag.TeamTwoName</option>
+                </select>
+                <span asp-validation-for="BelaCall" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TrumpCall" class="control-label"></label>
@@ -62,8 +103,8 @@
             });
 
             function calculateOppositeField(inputField, oppositeField) {
-                var userInput = parseInt($(inputField).val()) || 0; // Ensure userInput is a number
-                var calculatedValue = Math.max(162 - userInput, 0); // Ensure calculatedValue doesn't go below 0
+                var userInput = parseInt($(inputField).val()) || 0;
+                var calculatedValue = Math.max(162 - userInput, 0);
                 $(oppositeField).val(calculatedValue);
             }
 
@@ -74,6 +115,47 @@
             $('#TeamTwoResult').on('input', function () {
                 calculateOppositeField('#TeamTwoResult', '#TeamOneResult');
             });
+
+            $('#checkboxTeamOneCapote').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#checkboxTeamTwoCapote').prop('checked', false);
+                    $('#TeamTwoResult').val(162);
+                    $('#TeamOneResult').val(0);
+                    $('#CapoteCall').val("@ViewBag.TeamOneName");
+                }
+                else {
+                    $('#TeamTwoResult').val("");
+                    $('#TeamOneResult').val("");
+                    $('#CapoteCall').val("");
+                }
+            });
+
+            $('#checkboxTeamTwoCapote').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#checkboxTeamOneCapote').prop('checked', false);
+                    $('#TeamOneResult').val(162);
+                    $('#TeamTwoResult').val(0);
+                    $('#CapoteCall').val("@ViewBag.TeamTwoName");
+                }
+                else {
+                    $('#TeamOneResult').val("");
+                    $('#TeamTwoResult').val("");
+                    $('#CapoteCall').val("");
+                }
+            });
+
+            $('#TeamOneResult').on('focus', function () {
+                $('#checkboxTeamOneCapote').prop('checked', false);
+                $('#checkboxTeamTwoCapote').prop('checked', false);
+                $('#CapoteCall').val("");
+            });
+
+            $('#TeamTwoResult').on('focus', function () {
+                $('#checkboxTeamTwoCapote').prop('checked', false);
+                $('#checkboxTeamOneCapote').prop('checked', false);
+                $('#CapoteCall').val("");
+            });
+
         });
     </script>
 }

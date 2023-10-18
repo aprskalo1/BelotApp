@@ -15,9 +15,13 @@ public partial class GameResult
 
     public int? Combination { get; set; }
 
+    public string? CapoteCall { get; set; }
+
     public string? TrumpCall { get; set; }
 
     public string? CombinationCall { get; set; }
+
+    public string? BelaCall { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 

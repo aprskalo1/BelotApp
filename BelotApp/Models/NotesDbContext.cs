@@ -23,7 +23,7 @@ public partial class NotesDbContext : DbContext
     public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=tcp:belotenotesdb.database.windows.net,1433;Initial Catalog=BeloteNotes;Persist Security Info=False;User ID=BeloteNotesdBAdmin;Password=dbAdmin2002;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
+        => optionsBuilder.UseSqlServer("server=.;Database=BelotNotes;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
